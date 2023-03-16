@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | BookWise</title>
+        <title>Login | BookWise</title>
         <meta name="description" content="" />
       </Head>
-      <main>Olá Mundo</main>
+      <main>Olá Login</main>
     </>
   )
 }
