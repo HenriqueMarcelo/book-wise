@@ -1,11 +1,14 @@
 import { styled } from '@/src/styles/stitches.config'
 import Link from 'next/link'
 
-export const Container = styled('aside', {
+export const Container = styled('div', {
+  flex: '0 0 232px',
+})
+
+export const Aside = styled('aside', {
   width: '232px',
   height: 'calc(100vh - var(--space-5) - var(--space-5))',
   borderRadius: '$md',
-  margin: '$5',
   backgroundImage: `url(/images/sidebar-bg.png)`,
   backgroundSize: 'cover',
 
@@ -15,6 +18,8 @@ export const Container = styled('aside', {
   flexDirection: 'column',
 
   padding: '$10 $4 $6',
+
+  position: 'fixed',
 })
 
 export const TopItems = styled('div', {
