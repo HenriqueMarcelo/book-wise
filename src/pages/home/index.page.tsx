@@ -1,8 +1,9 @@
+import { CardBookFull } from '@/src/components/CardBookFull'
 import { CardBookSimple } from '@/src/components/CardBookSimple'
 import { PageTitle } from '@/src/components/PageTitle'
 import { CaretRight, ChartLineUp } from 'phosphor-react'
 import Template from '../template'
-import { Container, Title } from './styles'
+import { Container, RightColumn, Title } from './styles'
 
 export default function Home() {
   return (
@@ -16,8 +17,12 @@ export default function Home() {
             <span>Avaliações mais recentes</span>
             <a href=""></a>
           </Title>
+          <CardBookFull />
+          <CardBookFull />
+          <CardBookFull />
+          <CardBookFull />
         </div>
-        <div>
+        <RightColumn>
           <Title>
             <span>Livros Populares</span>
             <a href="">
@@ -27,7 +32,7 @@ export default function Home() {
           <CardBookSimple />
           <CardBookSimple />
           <CardBookSimple />
-        </div>
+        </RightColumn>
       </Container>
     </Template>
   )

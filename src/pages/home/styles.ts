@@ -6,6 +6,10 @@ export const Container = styled('div', {
   gap: '$16',
 })
 
+export const RightColumn = styled('div', {
+  flex: '0 0 324px',
+})
+
 export const Title = styled('h2', {
   display: 'flex',
   justifyContent: 'space-between',
