@@ -1,23 +1,35 @@
 import Image from 'next/image'
 import { Stars } from '../Stars'
-import { Body, Container, Header, Info, User } from './styles'
+import { Body, Container, Header, Info, ShortHeader, User } from './styles'
 
-export function CardBookFull() {
+interface CardBookFullProps {
+  user?: boolean
+}
+
+export function CardBookFull({ user = true }: CardBookFullProps) {
   return (
-    <Container>
-      <Header>
-        <User>
-          <Image src="/images/books/Book.png" alt="" width="40" height="40" />
-          <div>
-            <h5>John Doe</h5>
-            <time>Hoje</time>
-          </div>
-        </User>
-        <Stars />
-      </Header>
+    <Container short={!user}>
+      {user && (
+        <Header>
+          <User>
+            <Image src="/images/books/Book.png" alt="" width="40" height="40" />
+            <div>
+              <h5>John Doe</h5>
+              <time>Hoje</time>
+            </div>
+          </User>
+          <Stars />
+        </Header>
+      )}
       <Body>
         <Image src="/images/books/Book.png" alt="" width="108" height="152" />
         <Info>
+          {!user && (
+            <ShortHeader>
+              <time>Hoje</time>
+              <Stars />
+            </ShortHeader>
+          )}
           <div>
             <h3>A revolução dos bichos</h3>
             <h4>George Orwell</h4>

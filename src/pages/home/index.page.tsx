@@ -14,6 +14,15 @@ export default function Home() {
       <Container>
         <div>
           <Title>
+            <span>Sua última leitura</span>
+            <a href="">
+              Ver todas <CaretRight size={16} />
+            </a>
+          </Title>
+          <CardBookFull user={false} />
+
+          <br />
+          <Title>
             <span>Avaliações mais recentes</span>
             <a href=""></a>
           </Title>

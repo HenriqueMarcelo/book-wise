@@ -10,6 +10,20 @@ export const Container = styled('article', {
   transition: '.2s',
   marginBottom: '$3',
 
+  variants: {
+    short: {
+      true: {
+        background: '$gray600',
+      },
+    },
+  },
+
+  time: {
+    lineHeight: '$base',
+    fontSize: '$sm',
+    color: '$gray400',
+  },
+
   '&:hover, &:focus': {
     boxShadow: '0 0 0 2px $gray600',
   },
@@ -38,12 +52,6 @@ export const User = styled('div', {
     lineHeight: '$base',
     fontSize: '$md',
   },
-
-  time: {
-    lineHeight: '$base',
-    fontSize: '$sm',
-    color: '$gray400',
-  },
 })
 
 export const Body = styled('div', {
@@ -67,4 +75,10 @@ export const Info = styled('div', {
 
     marginBottom: '$5',
   },
+})
+
+export const ShortHeader = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '$3',
 })
