@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Stars } from '../Stars'
 import { Container, Info } from './styles'
 
-export function CardSimple() {
+export function CardBookSimple() {
   return (
     <Container>
       <Image src="/images/books/Book.png" alt="" width="64" height="94" />

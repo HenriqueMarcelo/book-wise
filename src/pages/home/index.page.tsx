@@ -1,4 +1,4 @@
-import { CardSimple } from '@/src/components/CardSimple'
+import { CardBookSimple } from '@/src/components/CardBookSimple'
 import { PageTitle } from '@/src/components/PageTitle'
 import { CaretRight, ChartLineUp } from 'phosphor-react'
 import Template from '../template'
@@ -24,9 +24,9 @@ export default function Home() {
               Ver todos <CaretRight size={16} />
             </a>
           </Title>
-          <CardSimple />
-          <CardSimple />
-          <CardSimple />
+          <CardBookSimple />
+          <CardBookSimple />
+          <CardBookSimple />
         </div>
       </Container>
     </Template>
