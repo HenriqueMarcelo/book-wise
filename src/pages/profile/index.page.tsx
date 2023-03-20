@@ -1,4 +1,5 @@
 import { CardBookFull } from '@/src/components/CardBookFull'
+import { CardRating } from '@/src/components/CardRating'
 import { FakeInput } from '@/src/components/FakeInput'
 import { PageTitle } from '@/src/components/PageTitle'
 import Image from 'next/image'
@@ -32,7 +33,11 @@ export default function Explore() {
           <FakeInput placeholder="Buscar livro ou autor">
             <MagnifyingGlass size={20} />
           </FakeInput>
-          <CardBookFull />
+          <CardRating />
+          <CardRating />
+          <CardRating />
+          <CardRating />
+          <CardRating />
         </LeftBlock>
         <UserBlock>
           <UserInfo>
