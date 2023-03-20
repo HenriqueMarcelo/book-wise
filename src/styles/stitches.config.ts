@@ -19,6 +19,7 @@ export const { styled, getCssText, globalCss } = createStitches({
       10: '2.5rem',
       12: '3rem',
       13: '3.25rem',
+      14: '3.5rem',
       16: '4rem',
       24: '6rem',
     },
