@@ -1,4 +1,3 @@
-import { CardBookFull } from '@/src/components/CardBookFull'
 import { CardRating } from '@/src/components/CardRating'
 import { FakeInput } from '@/src/components/FakeInput'
 import { PageTitle } from '@/src/components/PageTitle'
