@@ -13,7 +13,7 @@ export default function Explore() {
         <PageTitle>
           <Binoculars size={32} /> Explorar
         </PageTitle>
-        <FakeInput>
+        <FakeInput placeholder="Buscar livro ou autor">
           <MagnifyingGlass size={20} />
         </FakeInput>
       </SearchForm>
