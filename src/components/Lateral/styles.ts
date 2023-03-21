@@ -13,12 +13,6 @@ export const Container = styled('section', {
   overflow: 'auto',
 })
 
-export const SideMenu = styled('section', {
-  background: '$gray800',
-  flex: '0 0 660px',
-  padding: '$12',
-})
-
 export const Title = styled('h6', {
   display: 'flex',
   justifyContent: 'space-between',
@@ -38,5 +32,15 @@ export const Title = styled('h6', {
     '&:hover': {
       color: 'mediumpurple',
     },
+  },
+})
+
+export const SideMenu = styled('section', {
+  background: '$gray800',
+  flex: '0 0 660px',
+  padding: '$12',
+
+  [`> ${Title}`]: {
+    marginBottom: '$4',
   },
 })
