@@ -1,6 +1,7 @@
 import { CardBookSimple } from '@/src/components/CardBookSimple'
 import { FakeInput } from '@/src/components/FakeInput'
 import { PageTitle } from '@/src/components/PageTitle'
+import { Lateral } from '@/src/components/Lateral'
 import { Tag } from '@/src/components/Tag'
 import { Binoculars, MagnifyingGlass } from 'phosphor-react'
 import Template from '../template'
@@ -9,6 +10,7 @@ import { Container, SearchForm, TagsContainer } from './styles'
 export default function Explore() {
   return (
     <Template>
+      <Lateral />
       <SearchForm>
         <PageTitle>
           <Binoculars size={32} /> Explorar
