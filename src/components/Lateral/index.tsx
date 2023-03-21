@@ -1,5 +1,5 @@
 import { X } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Book } from './components/Book'
 import { Rating } from './components/Rating'
 import { CloseButton, Container, SideMenu, Title } from './styles'
@@ -10,6 +10,8 @@ interface LateralProps {
 
 export function Lateral({ onClose }: LateralProps) {
   const [isOpen, setIsOpen] = useState(false)
+
+  const containerRef = useRef<HTMLDivElement>(null)
 
   function onCloseModalClick() {
     setIsOpen(false)
@@ -22,8 +24,17 @@ export function Lateral({ onClose }: LateralProps) {
     setIsOpen(true)
   }, [])
 
+  if (containerRef.current) {
+    containerRef.current.onclick = (e) => {
+      if (e.target !== e.currentTarget) {
+        return
+      }
+      onCloseModalClick()
+    }
+  }
+
   return (
-    <Container open={isOpen}>
+    <Container open={isOpen} ref={containerRef}>
       <SideMenu open={isOpen}>
         <CloseButton onClick={onCloseModalClick}>
           <X size={24} />

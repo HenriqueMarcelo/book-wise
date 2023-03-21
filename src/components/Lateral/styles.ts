@@ -1,6 +1,6 @@
 import { styled } from '@/src/styles/stitches.config'
 
-export const Container = styled('section', {
+export const Container = styled('div', {
   display: 'flex',
   justifyContent: 'flex-end',
   position: 'fixed',
