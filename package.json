@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
+    "@radix-ui/react-dialog": "^1.0.3",
     "@stitches/react": "^1.2.8",
     "@types/node": "^18.15.3",
     "@types/react": "18.0.28",

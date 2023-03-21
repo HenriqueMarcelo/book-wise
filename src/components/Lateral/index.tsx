@@ -1,5 +1,6 @@
 import { X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
+import { LoginModalLink } from '../LoginModal/LoginModalLink'
 import { Book } from './components/Book'
 import { Rating } from './components/Rating'
 import { CloseButton, Container, SideMenu, Title } from './styles'
@@ -42,7 +43,9 @@ export function Lateral({ onClose }: LateralProps) {
         <Book />
         <Title>
           <span>Avaliações</span>
-          <a href="">Avaliar</a>
+          <LoginModalLink>
+            <a>Avaliar</a>
+          </LoginModalLink>
         </Title>
         <Rating />
         <Rating />

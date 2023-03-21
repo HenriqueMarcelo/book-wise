@@ -44,6 +44,7 @@ export const Title = styled('h6', {
   fontWeight: '$regular',
   marginBottom: '$4',
   color: '$gray200',
+  cursor: 'pointer',
 
   'a, button': {
     color: '$purple100',
