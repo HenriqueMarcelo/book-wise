@@ -1,6 +1,12 @@
 import { styled } from '@/src/styles/stitches.config'
 
-export const Container = styled('article', {
+export const Container = styled('button', {
+  border: 'none',
+  fontSize: '$md',
+  textAlign: 'left',
+
+  color: '$gray100',
+  cursor: 'pointer',
   display: 'flex',
   gap: '$5',
   background: '$gray700',
@@ -22,6 +28,7 @@ export const Info = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  height: '100%',
 
   h3: {},
 

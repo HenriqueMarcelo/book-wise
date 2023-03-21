@@ -1,14 +1,15 @@
 import Image from 'next/image'
+import { ButtonHTMLAttributes } from 'react'
 import { Stars } from '../Stars'
 import { Container, Info } from './styles'
 
-interface CardBookSimpleProps {
+interface CardBookSimpleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'lg'
 }
 
-export function CardBookSimple({ size = 'sm' }: CardBookSimpleProps) {
+export function CardBookSimple({ size = 'sm', ...rest }: CardBookSimpleProps) {
   return (
-    <Container>
+    <Container {...rest}>
       {size === 'sm' ? (
         <Image src="/images/books/Book.png" alt="" width="64" height="94" />
       ) : (

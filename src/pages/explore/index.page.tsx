@@ -41,13 +41,12 @@ export default function Explore() {
         <Tag>Suspense</Tag>
       </TagsContainer>
       <Container>
-        <button onClick={handleSelectBook}> abrir</button>
-        <CardBookSimple size="lg" />
-        <CardBookSimple size="lg" />
-        <CardBookSimple size="lg" />
-        <CardBookSimple size="lg" />
-        <CardBookSimple size="lg" />
-        <CardBookSimple size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
+        <CardBookSimple onClick={handleSelectBook} size="lg" />
         <div />
         <div />
         <div />
