@@ -6,11 +6,22 @@ import { Tag } from '@/src/components/Tag'
 import { Binoculars, MagnifyingGlass } from 'phosphor-react'
 import Template from '../template'
 import { Container, SearchForm, TagsContainer } from './styles'
+import { useState } from 'react'
 
 export default function Explore() {
+  const [bookSelected, setBookSelected] = useState(false)
+
+  function handleSelectBook() {
+    setBookSelected(true)
+  }
+
+  function handleCloseLateral() {
+    setBookSelected(false)
+  }
+
   return (
     <Template>
-      <Lateral />
+      {bookSelected && <Lateral onClose={handleCloseLateral} />}
       <SearchForm>
         <PageTitle>
           <Binoculars size={32} /> Explorar
@@ -30,6 +41,7 @@ export default function Explore() {
         <Tag>Suspense</Tag>
       </TagsContainer>
       <Container>
+        <button onClick={handleSelectBook}> abrir</button>
         <CardBookSimple size="lg" />
         <CardBookSimple size="lg" />
         <CardBookSimple size="lg" />

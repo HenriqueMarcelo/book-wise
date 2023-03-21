@@ -1,11 +1,33 @@
+import { X } from 'phosphor-react'
+import { useEffect, useState } from 'react'
 import { Book } from './components/Book'
 import { Rating } from './components/Rating'
-import { Container, SideMenu, Title } from './styles'
+import { CloseButton, Container, SideMenu, Title } from './styles'
 
-export function Lateral() {
+interface LateralProps {
+  onClose: () => void
+}
+
+export function Lateral({ onClose }: LateralProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  function onCloseModalClick() {
+    setIsOpen(false)
+    setTimeout(() => {
+      onClose()
+    }, 250)
+  }
+
+  useEffect(() => {
+    setIsOpen(true)
+  }, [])
+
   return (
-    <Container>
-      <SideMenu>
+    <Container open={isOpen}>
+      <SideMenu open={isOpen}>
+        <CloseButton onClick={onCloseModalClick}>
+          <X size={24} />
+        </CloseButton>
         <Book />
         <Title>
           <span>Avaliações</span>
