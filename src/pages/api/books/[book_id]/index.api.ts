@@ -13,6 +13,9 @@ export default async function handler(
     where: {
       id: bookId,
     },
+    include: {
+      ratings: true,
+    },
   })
 
   return res.json({ book })

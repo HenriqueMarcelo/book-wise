@@ -16,7 +16,6 @@ interface BookProps {
 }
 
 export function Book({ book }: BookProps) {
-  console.log(book)
   return (
     <Container>
       <BookContainer>

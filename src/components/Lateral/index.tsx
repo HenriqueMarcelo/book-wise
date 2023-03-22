@@ -1,5 +1,7 @@
+import { api } from '@/src/lib/axios'
 import { BookWithRatingAndCategories } from '@/src/pages/explore/index.page'
-import { X } from 'phosphor-react'
+import { Rating as RatingProps } from '@prisma/client'
+import { CircleNotch, X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
 import { LoginModalLink } from '../LoginModal/LoginModalLink'
 import { Book } from './components/Book'
@@ -13,6 +15,7 @@ interface LateralProps {
 
 export function Lateral({ onClose, book }: LateralProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [ratings, setRatings] = useState<RatingProps[] | null>(null)
 
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -26,6 +29,17 @@ export function Lateral({ onClose, book }: LateralProps) {
   useEffect(() => {
     setIsOpen(true)
   }, [])
+
+  useEffect(() => {
+    async function loadRatings() {
+      // await new Promise((resolve) => setTimeout(resolve, 2000))
+      const response = await api.get(`/books/${book.id}`)
+      if (response.data) {
+        setRatings(response.data.book.ratings)
+      }
+    }
+    loadRatings()
+  }, [book.id])
 
   if (containerRef.current) {
     containerRef.current.onclick = (e) => {
@@ -49,15 +63,11 @@ export function Lateral({ onClose, book }: LateralProps) {
             <a>Avaliar</a>
           </LoginModalLink>
         </Title>
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
-        <Rating />
+        {ratings ? (
+          ratings?.map((rating) => <Rating key={rating.id} />)
+        ) : (
+          <CircleNotch className="loading" size={52} />
+        )}
       </SideMenu>
     </Container>
   )

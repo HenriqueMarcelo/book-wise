@@ -25,8 +25,6 @@ export default function Explore({ categories, books }: ExploreProps) {
   const [bookSelected, setBookSelected] =
     useState<BookWithRatingAndCategories | null>(null)
 
-  console.log(books)
-
   function handleSelectBook(book: BookWithRatingAndCategories) {
     setBookSelected(book)
   }

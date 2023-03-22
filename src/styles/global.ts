@@ -1,4 +1,8 @@
-import { globalCss } from './stitches.config'
+import { globalCss, keyframes } from './stitches.config'
+
+const spin = keyframes({
+  '100%': { transform: 'rotate(360deg)' },
+})
 
 export const globalStyles = globalCss({
   '*': {
@@ -17,5 +21,10 @@ export const globalStyles = globalCss({
   'body, input, textarea, button': {
     fontFamily: '$default',
     fontWeight: 400,
+  },
+
+  '.loading': {
+    animation: `${spin} 1.5s linear infinite`,
+    margin: '1rem auto',
   },
 })

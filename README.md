@@ -3,6 +3,8 @@
 // getStaticProps pre-renders the data at _build_ time,
 // getServerSideProps runs at _request_ time.
 
+// await new Promise((resolve) => setTimeout(resolve, 2000))
+
 
 _____________________________________
 
