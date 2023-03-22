@@ -11,7 +11,7 @@ export const Container = styled('div', {
   width: '100vw',
 
   transition: 'all .15s ease-in',
-  transictionDelay: '.1',
+  transitionDelay: '.1',
 
   variants: {
     open: {

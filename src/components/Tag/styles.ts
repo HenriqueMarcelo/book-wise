@@ -7,6 +7,7 @@ export const Container = styled('button', {
   color: '$purple100',
   padding: '$1 $4',
   lineHeight: '$tall',
+  transition: '.2s',
 
   cursor: 'pointer',
 
