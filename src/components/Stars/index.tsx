@@ -3,10 +3,10 @@ import { Container } from './styles'
 
 interface StarProps {
   size?: 'sm' | 'md' | 'lg'
+  rating?: number
 }
 
-export function Stars({ size = 'sm' }: StarProps) {
-  const rating = 3.5
+export function Stars({ size = 'sm', rating = 3.5 }: StarProps) {
   let iconSize = 14
 
   switch (size) {
@@ -28,9 +28,13 @@ export function Stars({ size = 'sm' }: StarProps) {
     <Container>
       {Array.from({ length: 5 }).map((_, i) => {
         return rating < i + 1 && rating > i ? (
-          <StarHalf size={iconSize} weight="fill" />
+          <StarHalf key={i} size={iconSize} weight="fill" />
         ) : (
-          <Star size={iconSize} weight={rating >= i + 1 ? 'fill' : undefined} />
+          <Star
+            key={i}
+            size={iconSize}
+            weight={rating >= i + 1 ? 'fill' : undefined}
+          />
         )
       })}
     </Container>
