@@ -1,4 +1,5 @@
 import { Stars } from '@/src/components/Stars'
+import { BookWithRatingAndCategories } from '@/src/pages/explore/index.page'
 import Image from 'next/image'
 import { BookmarkSimple, BookOpen } from 'phosphor-react'
 import {
@@ -10,19 +11,24 @@ import {
   Number,
 } from './styles'
 
-export function Book() {
+interface BookProps {
+  book: BookWithRatingAndCategories
+}
+
+export function Book({ book }: BookProps) {
+  console.log(book)
   return (
     <Container>
       <BookContainer>
-        <Image src="/images/books/Book.png" alt="" width="171" height="242" />
+        <Image src={`/${book.cover_url}`} alt="" width="171" height="242" />
         <Info>
           <div>
-            <h3>A revolução dos bichos</h3>
-            <h4>George Orwell</h4>
+            <h3>{book.name}</h3>
+            <h4>{book.author}</h4>
           </div>
           <div>
-            <Stars size="md" />
-            <Number>3 avaliações</Number>
+            <Stars size="md" rating={book.rating} />
+            <Number>{book.ratings.length} avaliações</Number>
           </div>
         </Info>
       </BookContainer>
@@ -38,7 +44,7 @@ export function Book() {
           <BookOpen size={32} />
           <div>
             <h5>Páginas</h5>
-            <span>160</span>
+            <span>{book.total_pages}</span>
           </div>
         </BookNumber>
       </Footer>

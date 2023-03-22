@@ -10,29 +10,36 @@ import { useState } from 'react'
 import { prisma } from '@/src/lib/prisma'
 import { Book, Category } from '@prisma/client'
 
-interface BookWithRating extends Book {
+export interface BookWithRatingAndCategories extends Book {
   rating: number
+  categories: Category[]
+  ratings: any[]
 }
 
 interface ExploreProps {
   categories: Category[]
-  books: BookWithRating[]
+  books: BookWithRatingAndCategories[]
 }
 
 export default function Explore({ categories, books }: ExploreProps) {
-  const [bookSelected, setBookSelected] = useState(false)
+  const [bookSelected, setBookSelected] =
+    useState<BookWithRatingAndCategories | null>(null)
 
-  function handleSelectBook() {
-    setBookSelected(true)
+  console.log(books)
+
+  function handleSelectBook(book: BookWithRatingAndCategories) {
+    setBookSelected(book)
   }
 
   function handleCloseLateral() {
-    setBookSelected(false)
+    setBookSelected(null)
   }
 
   return (
     <Template>
-      {bookSelected && <Lateral onClose={handleCloseLateral} />}
+      {bookSelected && (
+        <Lateral book={bookSelected} onClose={handleCloseLateral} />
+      )}
       <SearchForm>
         <PageTitle>
           <Binoculars size={32} /> Explorar
@@ -51,7 +58,7 @@ export default function Explore({ categories, books }: ExploreProps) {
         {books.map((book) => (
           <CardBookSimple
             key={book.id}
-            onClick={handleSelectBook}
+            onClick={() => handleSelectBook(book)}
             size="lg"
             author={book.author}
             name={book.name}
@@ -76,10 +83,23 @@ export async function getStaticProps() {
           rate: true,
         },
       },
+      // https://www.prisma.io/docs/guides/database/troubleshooting-orm/help-articles/working-with-many-to-many-relations
+      categories: {
+        include: {
+          category: true,
+        },
+      },
     },
   })
 
-  const booksWithRating = books.map((book) => {
+  const booksFixedRelationWithCategory = books.map((book) => {
+    return {
+      ...book,
+      categories: book.categories.map((category) => category.category),
+    }
+  })
+
+  const booksWithRating = booksFixedRelationWithCategory.map((book) => {
     const avgRate =
       book.ratings.reduce((sum, rateObj) => {
         return sum + rateObj.rate

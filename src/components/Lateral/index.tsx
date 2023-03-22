@@ -1,3 +1,4 @@
+import { BookWithRatingAndCategories } from '@/src/pages/explore/index.page'
 import { X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
 import { LoginModalLink } from '../LoginModal/LoginModalLink'
@@ -7,9 +8,10 @@ import { CloseButton, Container, SideMenu, Title } from './styles'
 
 interface LateralProps {
   onClose: () => void
+  book: BookWithRatingAndCategories
 }
 
-export function Lateral({ onClose }: LateralProps) {
+export function Lateral({ onClose, book }: LateralProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -40,7 +42,7 @@ export function Lateral({ onClose }: LateralProps) {
         <CloseButton onClick={onCloseModalClick}>
           <X size={24} />
         </CloseButton>
-        <Book />
+        <Book book={book} />
         <Title>
           <span>Avaliações</span>
           <LoginModalLink>

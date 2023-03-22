@@ -14,10 +14,23 @@ export default async function handler(
           rate: true,
         },
       },
+      // https://www.prisma.io/docs/guides/database/troubleshooting-orm/help-articles/working-with-many-to-many-relations
+      categories: {
+        include: {
+          category: true,
+        },
+      },
     },
   })
 
-  const booksWithRating = books.map((book) => {
+  const booksFixedRelationWithCategory = books.map((book) => {
+    return {
+      ...book,
+      categories: book.categories.map((category) => category.category),
+    }
+  })
+
+  const booksWithRating = booksFixedRelationWithCategory.map((book) => {
     const avgRate =
       book.ratings.reduce((sum, rateObj) => {
         return sum + rateObj.rate
