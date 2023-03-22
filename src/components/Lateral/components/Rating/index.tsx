@@ -1,26 +1,36 @@
+/* eslint-disable @next/next/no-img-element */
 import { Stars } from '@/src/components/Stars'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { Container, Header, User } from './styles'
 
-export function Rating() {
+interface RatingProps {
+  image: string | null
+  name: string
+  date: Date
+  text: string
+  rate: number
+  rating: any
+}
+
+export function Rating({ image, name, date, text, rate, rating }: RatingProps) {
+  const dateString = new Date(date).toDateString()
   return (
     <Container>
       <Header>
         <User>
-          <Image src="/images/books/Book.png" alt="" width="40" height="40" />
+          {image ? (
+            <img src={image} alt="" width="40" height="40" />
+          ) : (
+            <img src="images/logo-rocket.png" alt="" width="40" height="40" />
+          )}
           <div>
-            <h5>John Doe</h5>
-            <time>Hoje</time>
+            <h5>{name}</h5>
+            <time>{dateString}</time>
           </div>
         </User>
-        <Stars />
+        <Stars rating={rate} />
       </Header>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-        ratione modi? Corporis eveniet nesciunt, assumenda officia consequatur
-        ratione fugiat incidunt vitae mollitia nobis labore maxime quia et nam
-        tenetur. Earum?
-      </p>
+      <p>{text}</p>
     </Container>
   )
 }

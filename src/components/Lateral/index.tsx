@@ -1,6 +1,6 @@
 import { api } from '@/src/lib/axios'
 import { BookWithRatingAndCategories } from '@/src/pages/explore/index.page'
-import { Rating as RatingProps } from '@prisma/client'
+import { Rating as RatingPrisma, User as UserPrisma } from '@prisma/client'
 import { CircleNotch, X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
 import { LoginModalLink } from '../LoginModal/LoginModalLink'
@@ -11,6 +11,10 @@ import { CloseButton, Container, SideMenu, Title } from './styles'
 interface LateralProps {
   onClose: () => void
   book: BookWithRatingAndCategories
+}
+
+type RatingProps = RatingPrisma & {
+  user: UserPrisma
 }
 
 export function Lateral({ onClose, book }: LateralProps) {
@@ -64,7 +68,17 @@ export function Lateral({ onClose, book }: LateralProps) {
           </LoginModalLink>
         </Title>
         {ratings ? (
-          ratings?.map((rating) => <Rating key={rating.id} />)
+          ratings?.map((rating) => (
+            <Rating
+              key={rating.id}
+              text={rating.description}
+              date={rating.created_at}
+              name={rating.user.name}
+              image={rating.user.avatar_url}
+              rate={rating.rate}
+              rating={rating}
+            />
+          ))
         ) : (
           <CircleNotch className="loading" size={52} />
         )}

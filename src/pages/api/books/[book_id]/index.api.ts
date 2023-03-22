@@ -14,7 +14,11 @@ export default async function handler(
       id: bookId,
     },
     include: {
-      ratings: true,
+      ratings: {
+        include: {
+          user: true,
+        },
+      },
     },
   })
 
