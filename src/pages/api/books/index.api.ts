@@ -1,13 +1,31 @@
 // /api/books
 
+// Find any user where at least one of their likes abides by this condition.
+// Replace with "every" to only search for users where ALL of their likes abide by this condition,
+// or "none" to only search for users where NONE of their likes abide by this condition.
+
 import { prisma } from '@/src/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
-  _req: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  let categoriesQuery
+
+  if (req.query.category) {
+    const categoryId = String(req.query.category)
+    categoriesQuery = {
+      some: {
+        categoryId,
+      },
+    }
+  }
+
   const books = await prisma.book.findMany({
+    where: {
+      categories: categoriesQuery,
+    },
     include: {
       ratings: {
         select: {
