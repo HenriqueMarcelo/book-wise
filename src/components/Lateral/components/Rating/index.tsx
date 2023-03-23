@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Stars } from '@/src/components/Stars'
-// import Image from 'next/image'
+import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
 import { Container, Header, User } from './styles'
 
 interface RatingProps {
@@ -9,11 +9,11 @@ interface RatingProps {
   date: Date
   text: string
   rate: number
-  rating: any
 }
 
-export function Rating({ image, name, date, text, rate, rating }: RatingProps) {
-  const dateString = new Date(date).toDateString()
+export function Rating({ image, name, date, text, rate }: RatingProps) {
+  const { dateFormatted, dateRelativeToNow, dateString } =
+    getDateFormattedAndRelative(date)
   return (
     <Container>
       <Header>
@@ -25,7 +25,9 @@ export function Rating({ image, name, date, text, rate, rating }: RatingProps) {
           )}
           <div>
             <h5>{name}</h5>
-            <time>{dateString}</time>
+            <time title={dateFormatted} dateTime={dateString}>
+              {dateRelativeToNow}
+            </time>
           </div>
         </User>
         <Stars rating={rate} />
