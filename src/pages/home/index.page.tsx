@@ -1,4 +1,4 @@
-import { CardBookFull } from '@/src/components/CardBookFull'
+import { CardRatingFull } from '@/src/components/CardRatingFull'
 import { CardBookSimple } from '@/src/components/CardBookSimple'
 import { PageTitle } from '@/src/components/PageTitle'
 import { prisma } from '@/src/lib/prisma'
@@ -37,7 +37,7 @@ export default function Home({ books, ratings }: HomeProps) {
               Ver todas <CaretRight size={16} />
             </a>
           </Title>
-          <CardBookFull user={false} />
+          <CardRatingFull user={false} />
           <br /> */}
 
           <Title>
@@ -46,7 +46,12 @@ export default function Home({ books, ratings }: HomeProps) {
           </Title>
 
           {ratings.map((rating) => (
-            <CardBookFull key={rating.id} />
+            <CardRatingFull
+              key={rating.id}
+              rating={rating}
+              book={rating.book}
+              user={rating.user}
+            />
           ))}
         </div>
         <RightColumn>
