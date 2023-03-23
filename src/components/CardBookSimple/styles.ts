@@ -4,6 +4,7 @@ export const Container = styled('button', {
   border: 'none',
   fontSize: '$md',
   textAlign: 'left',
+  width: '100%',
 
   color: '$gray100',
   cursor: 'pointer',
@@ -14,6 +15,7 @@ export const Container = styled('button', {
   borderRadius: '$md',
   transition: '.2s',
   marginBottom: '$3',
+  alignItems: 'stretch',
 
   '&:hover, &:focus': {
     boxShadow: '0 0 0 2px $gray600',
@@ -28,8 +30,6 @@ export const Info = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  height: '100%',
-
   h3: {},
 
   h4: {

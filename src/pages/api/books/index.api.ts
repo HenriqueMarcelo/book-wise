@@ -42,6 +42,12 @@ export default async function handler(
       categories: categoriesQuery,
       OR: searchQuery,
     },
+    take: 5,
+    orderBy: {
+      ratings: {
+        _count: 'desc',
+      },
+    },
     include: {
       ratings: {
         select: {
