@@ -38,7 +38,7 @@ export default function Explore({ categories, books }: ExploreProps) {
   } = useForm()
 
   const onSubmit = async (data: any) => {
-    const response = await api.get(`/books?q=${data.searcg}`)
+    const response = await api.get(`/books?q=${data.search}`)
     if (response.data.booksWithRating) {
       setBooksList(response.data.booksWithRating)
     }

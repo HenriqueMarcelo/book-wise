@@ -12,6 +12,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   let categoriesQuery
+  let searchQuery
 
   if (req.query.category) {
     const categoryId = String(req.query.category)
@@ -22,9 +23,24 @@ export default async function handler(
     }
   }
 
+  if (req.query.q) {
+    const qQuery = {
+      contains: String(req.query.q),
+    }
+    searchQuery = [
+      {
+        name: qQuery,
+      },
+      {
+        author: qQuery,
+      },
+    ]
+  }
+
   const books = await prisma.book.findMany({
     where: {
       categories: categoriesQuery,
+      OR: searchQuery,
     },
     include: {
       ratings: {
