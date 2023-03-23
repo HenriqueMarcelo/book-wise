@@ -30,16 +30,20 @@ export default function Explore({ categories, books }: ExploreProps) {
     useState<BookWithRatingAndCategories | null>(null)
   const [categorySelected, setCategorySelected] = useState<string | null>(null)
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { isSubmitting },
-  // } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+    reset,
+  } = useForm()
 
-  // const onSubmit = async (data: any) => {
-  //   await new Promise((resolve) => setTimeout(resolve, 2000))
-  //   // Terminar
-  // }
+  const onSubmit = async (data: any) => {
+    const response = await api.get(`/books?q=${data.searcg}`)
+    if (response.data.booksWithRating) {
+      setBooksList(response.data.booksWithRating)
+    }
+    setCategorySelected(null)
+  }
 
   function handleSelectBook(book: BookWithRatingAndCategories) {
     setBookSelected(book)
@@ -56,6 +60,7 @@ export default function Explore({ categories, books }: ExploreProps) {
       setBooksList(response.data.booksWithRating)
     }
     setCategorySelected(categoryId)
+    reset()
   }
 
   return (
@@ -63,7 +68,7 @@ export default function Explore({ categories, books }: ExploreProps) {
       {bookSelected && (
         <Lateral book={bookSelected} onClose={handleCloseLateral} />
       )}
-      {/* <SearchForm onSubmit={handleSubmit(onSubmit)}>
+      <SearchForm onSubmit={handleSubmit(onSubmit)}>
         <PageTitle>
           <Binoculars size={32} /> Explorar
         </PageTitle>
@@ -74,7 +79,7 @@ export default function Explore({ categories, books }: ExploreProps) {
         >
           <MagnifyingGlass size={20} />
         </FakeInput>
-      </SearchForm> */}
+      </SearchForm>
       <TagsContainer>
         <Tag selected={!categorySelected} onClick={() => selectCategory(null)}>
           Tudo
