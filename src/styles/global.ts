@@ -27,4 +27,9 @@ export const globalStyles = globalCss({
     animation: `${spin} 1.5s linear infinite`,
     margin: '1rem auto',
   },
+
+  a: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
 })

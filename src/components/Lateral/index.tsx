@@ -74,6 +74,7 @@ export function Lateral({ onClose, book }: LateralProps) {
               text={rating.description}
               date={rating.created_at}
               name={rating.user.name}
+              userId={rating.user.id}
               image={rating.user.avatar_url}
               rate={rating.rate}
             />

@@ -11,6 +11,7 @@ export const LeftBlock = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '$6',
+  flex: '1',
 })
 
 export const UserBlock = styled('div', {

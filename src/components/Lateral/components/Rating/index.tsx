@@ -4,19 +4,20 @@ import { Container, Header, User } from './styles'
 
 interface RatingProps {
   image: string | null
+  userId: string
   name: string
   date: Date
   text: string
   rate: number
 }
 
-export function Rating({ image, name, date, text, rate }: RatingProps) {
+export function Rating({ image, name, date, text, rate, userId }: RatingProps) {
   const { dateFormatted, dateRelativeToNow, dateString } =
     getDateFormattedAndRelative(date)
   return (
     <Container>
       <Header>
-        <User>
+        <User href={`/profile/${userId}`}>
           <img
             src={image || 'images/logo-rocket.png'}
             alt=""

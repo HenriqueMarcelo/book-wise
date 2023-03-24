@@ -6,5 +6,6 @@ export const Container = styled('section', {
 
   '&>main': {
     padding: '$13 $24',
+    width: '100%',
   },
 })
