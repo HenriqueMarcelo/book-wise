@@ -17,11 +17,12 @@ export function Rating({ image, name, date, text, rate }: RatingProps) {
     <Container>
       <Header>
         <User>
-          {image ? (
-            <img src={image} alt="" width="40" height="40" />
-          ) : (
-            <img src="images/logo-rocket.png" alt="" width="40" height="40" />
-          )}
+          <img
+            src={image || 'images/logo-rocket.png'}
+            alt=""
+            width="40"
+            height="40"
+          />
           <div>
             <h5>{name}</h5>
             <time title={dateFormatted} dateTime={dateString}>

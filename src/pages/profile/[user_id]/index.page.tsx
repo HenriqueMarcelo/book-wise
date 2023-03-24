@@ -75,7 +75,12 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
         </LeftBlock>
         <UserBlock>
           <UserInfo>
-            <img src={user.avatar_url || ''} alt="" width="72" height="72" />
+            <img
+              src={user.avatar_url || 'images/logo-rocket.png'}
+              alt=""
+              width="72"
+              height="72"
+            />
             <div>
               <h5>{user.name}</h5>
               <time title={dateFormatted} dateTime={dateString}>

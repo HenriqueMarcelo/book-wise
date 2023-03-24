@@ -19,7 +19,12 @@ export function CardRatingFull({ user, book, rating }: CardRatingFullProps) {
       {user && (
         <Header>
           <User>
-            <Image src={`/${book.cover_url}`} alt="" width="40" height="40" />
+            <img
+              src={user.avatar_url || 'images/logo-rocket.png'}
+              alt=""
+              width="40"
+              height="40"
+            />
             <div>
               <h5>{user.name}</h5>
               <time title={dateFormatted} dateTime={dateString}>

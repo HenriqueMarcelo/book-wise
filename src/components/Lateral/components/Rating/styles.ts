@@ -29,6 +29,7 @@ export const User = styled('div', {
   gap: '$4',
 
   img: {
+    objectFit: 'cover',
     border: '1px solid $green100',
     borderRadius: '$full',
   },

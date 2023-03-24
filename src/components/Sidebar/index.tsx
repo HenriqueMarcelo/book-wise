@@ -27,7 +27,10 @@ export function Sidebar() {
             <NavButton href="/explore" active={currentRoute === '/explore'}>
               <Binoculars size={24} /> Explorar
             </NavButton>
-            <NavButton href="/profile" active={currentRoute === '/profile'}>
+            <NavButton
+              href="/profile/4383f783-6ce1-4f92-b1dd-7a7a693c4aef"
+              active={currentRoute === '/profile'}
+            >
               <User size={24} />
               Perfil
             </NavButton>
