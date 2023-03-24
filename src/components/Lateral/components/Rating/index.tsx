@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Stars } from '@/src/components/Stars'
 import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
 import { Container, Header, User } from './styles'

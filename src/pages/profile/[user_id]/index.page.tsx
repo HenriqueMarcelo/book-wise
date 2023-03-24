@@ -2,6 +2,7 @@ import { CardRating } from '@/src/components/CardRating'
 import { FakeInput } from '@/src/components/FakeInput'
 import { PageTitle } from '@/src/components/PageTitle'
 import { prisma } from '@/src/lib/prisma'
+import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
 import {
   Book,
   CategoriesOnBooks,
@@ -10,7 +11,6 @@ import {
   User as UserPrisma,
 } from '@prisma/client'
 import { GetServerSideProps } from 'next'
-import Image from 'next/image'
 import {
   BookmarkSimple,
   BookOpen,
@@ -55,8 +55,10 @@ interface ExploreProps {
   })[]
 }
 
-export default function Explore(props: ExploreProps) {
-  console.log(props)
+export default function Explore({ infos, ratings, user }: ExploreProps) {
+  const { dateFormatted, dateRelativeToNow, dateString } =
+    getDateFormattedAndRelative(user.created_at)
+
   return (
     <Template>
       <PageTitle>
@@ -75,10 +77,12 @@ export default function Explore(props: ExploreProps) {
         </LeftBlock>
         <UserBlock>
           <UserInfo>
-            <Image src="/images/books/Book.png" alt="" width="72" height="72" />
+            <img src={user.avatar_url || ''} alt="" width="72" height="72" />
             <div>
-              <h5>John Doe</h5>
-              <time>membro desde 2019</time>
+              <h5>{user.name}</h5>
+              <time title={dateFormatted} dateTime={dateString}>
+                membro(a) {dateRelativeToNow}
+              </time>
             </div>
           </UserInfo>
           <HR />
@@ -86,28 +90,28 @@ export default function Explore(props: ExploreProps) {
             <UserNumber>
               <BookOpen size={32} />
               <div>
-                <h5>3853</h5>
+                <h5>{infos.pages}</h5>
                 <span>Páginas lidas </span>
               </div>
             </UserNumber>
             <UserNumber>
               <Books size={32} />
               <div>
-                <h5>10</h5>
+                <h5>{infos.booksCount}</h5>
                 <span>Livros avaliados </span>
               </div>
             </UserNumber>
             <UserNumber>
               <UserList size={32} />
               <div>
-                <h5>8</h5>
+                <h5>{infos.authorsCount}</h5>
                 <span>Autores lidos </span>
               </div>
             </UserNumber>
             <UserNumber>
               <BookmarkSimple size={32} />
               <div>
-                <h5>Computação</h5>
+                <h5>{infos.bestGenre.name}</h5>
                 <span>Categoria mais lida </span>
               </div>
             </UserNumber>

@@ -27,6 +27,7 @@ export const UserInfo = styled('div', {
   gap: '$5',
 
   img: {
+    objectFit: 'cover',
     border: '1px solid $green100',
     borderRadius: '$full',
   },
