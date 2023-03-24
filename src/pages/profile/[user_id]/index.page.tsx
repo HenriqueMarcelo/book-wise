@@ -10,7 +10,7 @@ import {
   User,
   UserList,
 } from 'phosphor-react'
-import Template from '../template'
+import Template from '../../template'
 import {
   Container,
   HR,
