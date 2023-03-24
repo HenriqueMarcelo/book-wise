@@ -1,28 +1,34 @@
+import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
+import { Book, Rating } from '@prisma/client'
 import Image from 'next/image'
 import { Stars } from '../Stars'
 import { Time, Card, Info, CardHeader } from './styles'
 
-export function CardRating() {
+interface CardRatingProps {
+  book: Book
+  rating: Rating
+}
+
+export function CardRating({ book, rating }: CardRatingProps) {
+  const { dateFormatted, dateRelativeToNow, dateString } =
+    getDateFormattedAndRelative(rating.created_at)
   return (
     <div>
-      <Time>Há 2 dias</Time>
+      <Time title={dateFormatted} dateTime={dateString}>
+        {dateRelativeToNow}
+      </Time>
       <Card>
         <CardHeader>
-          <Image src="/images/books/Book.png" alt="" width="108" height="152" />
+          <Image src={`/${book.cover_url}`} alt="" width="108" height="152" />
           <Info>
             <div>
-              <h3>A revolução dos bichos</h3>
-              <h4>George Orwell</h4>
+              <h3>{book.name}</h3>
+              <h4>{book.author}</h4>
             </div>
             <Stars />
           </Info>
         </CardHeader>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis
-          magnam obcaecati corrupti adipisci? Facere natus doloremque labore
-          rerum officiis a deleniti, repellendus hic deserunt suscipit. Commodi
-          voluptatum temporibus autem voluptas!
-        </p>
+        <p>{rating.description}</p>
       </Card>
     </div>
   )

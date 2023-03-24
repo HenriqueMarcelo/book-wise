@@ -66,14 +66,12 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
       </PageTitle>
       <Container>
         <LeftBlock>
-          <FakeInput placeholder="Buscar livro ou autor">
+          <FakeInput placeholder="Buscar livro avaliado">
             <MagnifyingGlass size={20} />
           </FakeInput>
-          <CardRating />
-          <CardRating />
-          <CardRating />
-          <CardRating />
-          <CardRating />
+          {ratings.map((rating) => (
+            <CardRating key={rating.id} book={rating.book} rating={rating} />
+          ))}
         </LeftBlock>
         <UserBlock>
           <UserInfo>
