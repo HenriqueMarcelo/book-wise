@@ -1,6 +1,7 @@
 import { CardRating } from '@/src/components/CardRating'
 import { FakeInput } from '@/src/components/FakeInput'
 import { PageTitle } from '@/src/components/PageTitle'
+import { api } from '@/src/lib/axios'
 import { prisma } from '@/src/lib/prisma'
 import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
 import {
@@ -19,6 +20,8 @@ import {
   User,
   UserList,
 } from 'phosphor-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Template from '../../template'
 import {
   Container,
@@ -59,17 +62,36 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
   const { dateFormatted, dateRelativeToNow, dateString } =
     getDateFormattedAndRelative(user.created_at)
 
+  const [listRatings, setRatingsList] = useState(ratings)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm()
+
+  const onSubmit = async (data: any) => {
+    const response = await api.get(`/users/${user.id}/ratings?q=${data.search}`)
+    if (response.data.rating) {
+      setRatingsList(response.data.rating)
+    }
+  }
+
   return (
     <Template>
       <PageTitle>
         <User size={32} /> Perfil
       </PageTitle>
       <Container>
-        <LeftBlock>
-          <FakeInput placeholder="Buscar livro avaliado">
+        <LeftBlock as="form" onSubmit={handleSubmit(onSubmit)}>
+          <FakeInput
+            placeholder="Buscar livro avaliado"
+            {...register('search')}
+            disabled={isSubmitting}
+          >
             <MagnifyingGlass size={20} />
           </FakeInput>
-          {ratings.map((rating) => (
+          {listRatings.map((rating) => (
             <CardRating key={rating.id} book={rating.book} rating={rating} />
           ))}
         </LeftBlock>

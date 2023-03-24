@@ -1,4 +1,4 @@
-// /api/users/4383f783-6ce1-4f92-b1dd-7a7a693c4aef/rating
+// /api/users/4383f783-6ce1-4f92-b1dd-7a7a693c4aef/ratings
 
 import { prisma } from '@/src/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
