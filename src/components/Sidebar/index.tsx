@@ -29,7 +29,7 @@ export function Sidebar() {
             </NavButton>
             <NavButton
               href="/profile/4383f783-6ce1-4f92-b1dd-7a7a693c4aef"
-              active={currentRoute === '/profile'}
+              active={currentRoute.includes('profile')}
             >
               <User size={24} />
               Perfil
