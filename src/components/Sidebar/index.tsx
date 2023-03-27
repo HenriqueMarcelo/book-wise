@@ -8,12 +8,22 @@ import {
 } from './styles'
 import logo from '../../assets/images/logo.svg'
 import Image from 'next/image'
-import { Binoculars, ChartLineUp, SignIn, User } from 'phosphor-react'
+import { Binoculars, ChartLineUp, SignIn, SignOut, User } from 'phosphor-react'
 import { useRouter } from 'next/router'
+import { useSession, signOut } from 'next-auth/react'
 
 export function Sidebar() {
+  const session = useSession()
   const router = useRouter()
   const currentRoute = router.pathname
+
+  function handleLogout() {
+    signOut({ callbackUrl: '/' })
+  }
+
+  function handleGoToLogin() {
+    router.push('/')
+  }
 
   return (
     <Container>
@@ -27,18 +37,37 @@ export function Sidebar() {
             <NavButton href="/explore" active={currentRoute === '/explore'}>
               <Binoculars size={24} /> Explorar
             </NavButton>
-            <NavButton
-              href="/profile/4383f783-6ce1-4f92-b1dd-7a7a693c4aef"
-              active={currentRoute.includes('profile')}
-            >
-              <User size={24} />
-              Perfil
-            </NavButton>
+            {session.status === 'authenticated' && (
+              <NavButton
+                href="/profile/4383f783-6ce1-4f92-b1dd-7a7a693c4aef"
+                active={currentRoute.includes('profile')}
+              >
+                <User size={24} />
+                Perfil
+              </NavButton>
+            )}
           </Navigation>
         </TopItems>
-        <LoginButton>
-          Fazer login <SignIn size={20} weight="fill" />
-        </LoginButton>
+
+        {session.status === 'unauthenticated' && (
+          <LoginButton onClick={handleGoToLogin}>
+            <strong>Fazer login</strong>
+            <SignIn size={20} weight="fill" />
+          </LoginButton>
+        )}
+
+        {session.status === 'authenticated' && (
+          <LoginButton onClick={handleLogout}>
+            <img
+              src={session.data.user?.image || 'images/logo-rocket.png'}
+              alt=""
+              width="32"
+              height="32"
+            />
+            {String(session.data.user?.name).split(' ')[0]}
+            <SignOut size={20} color="#F75A68" />
+          </LoginButton>
+        )}
       </Aside>
     </Container>
   )

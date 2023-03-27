@@ -73,8 +73,9 @@ export const LoginButton = styled('button', {
   background: 'none',
   fontSize: '$4',
 
-  fontWeight: 'bold',
+  // fontWeight: 'bold',
   display: 'flex',
+  alignItems: 'center',
   gap: '$3',
   cursor: 'pointer',
   color: '$gray200',
@@ -85,6 +86,12 @@ export const LoginButton = styled('button', {
 
   svg: {
     color: '$green100',
+  },
+
+  img: {
+    objectFit: 'cover',
+    border: '1px solid $green100',
+    borderRadius: '$full',
   },
 
   '&:hover': {
