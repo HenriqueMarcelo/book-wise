@@ -20,7 +20,7 @@ export function CardRatingFull({ user, book, rating }: CardRatingFullProps) {
         <Header>
           <User href={`/profile/${user.id}`}>
             <img
-              src={user.avatar_url || 'images/logo-rocket.png'}
+              src={user.image || 'images/logo-rocket.png'}
               alt=""
               width="40"
               height="40"

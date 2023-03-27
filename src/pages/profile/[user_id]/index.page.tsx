@@ -98,7 +98,7 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
         <UserBlock>
           <UserInfo>
             <img
-              src={user.avatar_url || 'images/logo-rocket.png'}
+              src={user.image || 'images/logo-rocket.png'}
               alt=""
               width="72"
               height="72"
