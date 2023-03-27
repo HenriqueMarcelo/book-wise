@@ -8,9 +8,13 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  name       String
-  avatar_url String?
+  id   String @id @default(uuid())
+  name String
+
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+
+  image      String? // Possível problema | image | avatar_url
   created_at DateTime @default(now())
 
   accounts Account[]
@@ -70,30 +74,33 @@ model Rating {
 }
 
 model Account {
-  id                  String  @id @default(cuid())
-  user_id             String
-  type                String
-  provider            String
-  provider_account_id String
-  refresh_token       String?
-  access_token        String?
-  expires_at          Int?
-  token_type          String?
-  scope               String?
-  id_token            String?
-  session_state       String?
-  user                User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String // Possível problema | userId | user_id
+  type              String?
+  provider          String
+  providerAccountId String // Possível problema | providerAccountId | provider_account_id
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
 
-  @@unique([provider, provider_account_id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
 model Session {
-  id            String   @id @default(cuid())
-  session_token String
-  user_id       String
-  expires       DateTime
-  user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique // Possível problema | sessionToken | session_token
+  userId       String? // Possível problema | userId | user_id
+  accessToken  String?
+  expires      DateTime
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }

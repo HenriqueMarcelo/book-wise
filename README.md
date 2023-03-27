@@ -5,6 +5,13 @@
 
 // await new Promise((resolve) => setTimeout(resolve, 2000))
 
+## Some useful commands
+
+- `npx prisma init --datasource-provider SQLite`
+- `npx prisma migrate dev`
+- `npx prisma studio`
+- `npx prisma db push` `npx prisma db push`
+
 
 _____________________________________
 

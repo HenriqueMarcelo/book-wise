@@ -2,8 +2,18 @@ import { Container, Login, Logo } from './styles'
 import logo from '../../assets/images/logo.svg'
 import Image from 'next/image'
 import { LoginButton } from '@/src/components/LoginButton'
+import { signIn, useSession } from 'next-auth/react'
 
 export default function Home() {
+  async function handleSignInGithub() {
+    const r = await signIn('github')
+    console.log('Resposta Autenticação', r)
+  }
+
+  const session = useSession()
+
+  console.log(session)
+
   return (
     <Container>
       <Logo>
@@ -16,7 +26,7 @@ export default function Home() {
           <Image src="/images/logo-google.png" alt="" width="32" height="32" />
           Entrar com Google
         </LoginButton>
-        <LoginButton>
+        <LoginButton onClick={handleSignInGithub}>
           <Image src="/images/logo-github.png" alt="" width="32" height="32" />
           Entrar com Github
         </LoginButton>
