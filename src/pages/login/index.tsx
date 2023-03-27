@@ -6,8 +6,11 @@ import { signIn, useSession } from 'next-auth/react'
 
 export default function Home() {
   async function handleSignInGithub() {
-    const r = await signIn('github')
-    console.log('Resposta Autenticação', r)
+    await signIn('github')
+  }
+
+  async function handleSignInGoogle() {
+    await signIn('google')
   }
 
   const session = useSession()
@@ -22,7 +25,7 @@ export default function Home() {
       <Login>
         <h1>Boas vindas!</h1>
         <h2>Faça seu login ou acesse como visitante.</h2>
-        <LoginButton>
+        <LoginButton onClick={handleSignInGoogle}>
           <Image src="/images/logo-google.png" alt="" width="32" height="32" />
           Entrar com Google
         </LoginButton>
