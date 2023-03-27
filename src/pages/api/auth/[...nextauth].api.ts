@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth'
+import NextAuth, { Session, User } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
@@ -26,5 +26,16 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET ?? '',
     }),
   ],
+  callbacks: {
+    session: async ({ session, user }: { session: Session; user: User }) => ({
+      ...session,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+      },
+    }),
+  },
 }
 export default NextAuth(authOptions)

@@ -25,6 +25,8 @@ export function Sidebar() {
     router.push('/')
   }
 
+  console.log(session)
+
   return (
     <Container>
       <Aside>
@@ -39,7 +41,7 @@ export function Sidebar() {
             </NavButton>
             {session.status === 'authenticated' && (
               <NavButton
-                href="/profile/4383f783-6ce1-4f92-b1dd-7a7a693c4aef"
+                href={`/profile/${session.data.user.id}`}
                 active={currentRoute.includes('profile')}
               >
                 <User size={24} />
