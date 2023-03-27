@@ -17,7 +17,6 @@ export const LeftBlock = styled('div', {
 export const UserBlock = styled('div', {
   flex: '0 0 308px',
   borderLeft: '1px solid $gray700',
-  //   padding: '0 $14',
 })
 
 export const UserInfo = styled('div', {
@@ -26,6 +25,7 @@ export const UserInfo = styled('div', {
   alignItems: 'center',
   textAlign: 'center',
   gap: '$5',
+  padding: '0 $4',
 
   img: {
     objectFit: 'cover',

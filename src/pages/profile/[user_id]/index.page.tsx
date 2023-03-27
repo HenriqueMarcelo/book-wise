@@ -133,13 +133,15 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
                 <span>Autores lidos </span>
               </div>
             </UserNumber>
-            <UserNumber>
-              <BookmarkSimple size={32} />
-              <div>
-                <h5>{infos.bestGenre.name}</h5>
-                <span>Categoria mais lida </span>
-              </div>
-            </UserNumber>
+            {infos.bestGenre && (
+              <UserNumber>
+                <BookmarkSimple size={32} />
+                <div>
+                  <h5>{infos.bestGenre.name}</h5>
+                  <span>Categoria mais lida </span>
+                </div>
+              </UserNumber>
+            )}
           </UserNumbers>
         </UserBlock>
       </Container>
@@ -205,7 +207,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       pages,
       booksCount: books.length,
       authorsCount: uniqueAuthors.length,
-      bestGenre: genreNumbers[0],
+      bestGenre: genreNumbers[0] ? genreNumbers[0] : null,
     }
 
     return {
