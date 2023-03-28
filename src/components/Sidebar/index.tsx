@@ -25,8 +25,6 @@ export function Sidebar() {
     router.push('/')
   }
 
-  console.log(session)
-
   return (
     <Container>
       <Aside>
