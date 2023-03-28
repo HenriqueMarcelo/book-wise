@@ -15,13 +15,13 @@ interface LateralProps {
   book: BookWithRatingAndCategories
 }
 
-type RatingProps = RatingPrisma & {
+export type RatingWithUserProps = RatingPrisma & {
   user: UserPrisma
 }
 
 export function Lateral({ onClose, book }: LateralProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [ratings, setRatings] = useState<RatingProps[] | null>(null)
+  const [ratings, setRatings] = useState<RatingWithUserProps[] | null>(null)
   const [showRateInput, setShowRateInput] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -63,6 +63,16 @@ export function Lateral({ onClose, book }: LateralProps) {
     setShowRateInput(true)
   }
 
+  function newRating(rating: RatingWithUserProps) {
+    if (ratings) {
+      setRatings([rating, ...ratings])
+    } else {
+      setRatings([rating])
+    }
+
+    setShowRateInput(false)
+  }
+
   return (
     <Container open={isOpen} ref={containerRef}>
       <SideMenu open={isOpen}>
@@ -83,7 +93,7 @@ export function Lateral({ onClose, book }: LateralProps) {
             <a onClick={handleShowRate}>Avaliar</a>
           )}
         </Title>
-        {showRateInput && <RateInput />}
+        {showRateInput && <RateInput bookId={book.id} finished={newRating} />}
         {ratings ? (
           ratings?.map((rating) => (
             <Rating

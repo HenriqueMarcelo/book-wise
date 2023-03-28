@@ -1,5 +1,6 @@
 import { Stars } from '@/src/components/Stars'
 import { getDateFormattedAndRelative } from '@/src/utils/get-date-formatted-and-relative'
+import { useSession } from 'next-auth/react'
 import { Container, Header, User } from './styles'
 
 interface RatingProps {
@@ -14,8 +15,11 @@ interface RatingProps {
 export function Rating({ image, name, date, text, rate, userId }: RatingProps) {
   const { dateFormatted, dateRelativeToNow, dateString } =
     getDateFormattedAndRelative(date)
+
+  const session = useSession()
+
   return (
-    <Container>
+    <Container self={userId === session?.data?.user.id}>
       <Header>
         <User href={`/profile/${userId}`}>
           <img

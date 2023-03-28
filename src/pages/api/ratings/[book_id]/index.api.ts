@@ -51,6 +51,9 @@ export default async function handle(
       user_id,
       rate,
     },
+    include: {
+      user: true,
+    },
   })
 
   return res.status(201).json(rating)

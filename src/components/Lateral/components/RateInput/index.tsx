@@ -1,12 +1,22 @@
 import { CustomTextArea } from '@/src/components/CustomTextArea'
 import { StarsInput } from '@/src/components/StarsInput'
+import { api } from '@/src/lib/axios'
+import { useSession } from 'next-auth/react'
 import { Check, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { RatingWithUserProps } from '../..'
 import { ActionButton, Buttons, Container, Header, User } from './styles'
 
-export function RateInput() {
+interface RateInputProps {
+  bookId: string
+  finished: (rating: RatingWithUserProps) => void
+}
+
+export function RateInput({ bookId, finished }: RateInputProps) {
   const [rate, setRate] = useState(0)
+
+  const session = useSession()
 
   const {
     register,
@@ -15,8 +25,13 @@ export function RateInput() {
     reset,
   } = useForm()
 
-  function onSubmit(data: any) {
-    console.log(data, rate)
+  async function onSubmit(data: any) {
+    const rating = await api.post(`/ratings/${bookId}`, {
+      rate,
+      description: data.description,
+    })
+    onReset()
+    finished(rating.data as RatingWithUserProps)
   }
 
   function onReset() {
@@ -28,8 +43,13 @@ export function RateInput() {
     <Container onSubmit={handleSubmit(onSubmit)}>
       <Header>
         <User>
-          <img src={'images/logo-rocket.png'} alt="" width="40" height="40" />
-          Cristofer Rosser
+          <img
+            src={session?.data?.user.image || 'images/logo-rocket.png'}
+            alt=""
+            width="40"
+            height="40"
+          />
+          {session?.data?.user.name}
         </User>
         <StarsInput
           value={rate}

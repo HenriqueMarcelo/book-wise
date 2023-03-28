@@ -17,6 +17,14 @@ export const Container = styled('div', {
     color: '$gray400',
     fontSize: '$sm',
   },
+
+  variants: {
+    self: {
+      true: {
+        background: '$gray600',
+      },
+    },
+  },
 })
 
 export const Header = styled('header', {
