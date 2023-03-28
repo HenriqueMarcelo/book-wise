@@ -7,6 +7,9 @@ import Link from 'next/link'
 import { CaretRight, ChartLineUp } from 'phosphor-react'
 import Template from '../template'
 import { Container, RightColumn, Title } from './styles'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth].api'
+import { GetServerSideProps } from 'next'
 
 export interface BookWithRatingAndCategories extends Book {
   rating: number
@@ -20,10 +23,11 @@ export interface RatingWithUserAndBook extends Rating {
 }
 interface HomeProps {
   ratings: RatingWithUserAndBook[]
+  myLastRating: RatingWithUserAndBook | null
   books: BookWithRatingAndCategories[]
 }
 
-export default function Home({ books, ratings }: HomeProps) {
+export default function Home({ books, ratings, myLastRating }: HomeProps) {
   return (
     <Template>
       <PageTitle>
@@ -31,14 +35,23 @@ export default function Home({ books, ratings }: HomeProps) {
       </PageTitle>
       <Container>
         <div>
-          {/* <Title>
-            <span>Sua última leitura</span>
-            <a href="">
-              Ver todas <CaretRight size={16} />
-            </a>
-          </Title>
-          <CardRatingFull user={false} />
-          <br /> */}
+          {myLastRating && (
+            <>
+              <Title>
+                <span>Sua última leitura</span>
+                <a href="">
+                  Ver todas <CaretRight size={16} />
+                </a>
+              </Title>
+              <CardRatingFull
+                user={myLastRating.user}
+                key={myLastRating.id}
+                rating={myLastRating}
+                book={myLastRating.book}
+              />
+              <br />
+            </>
+          )}
 
           <Title>
             <span>Avaliações mais recentes</span>
@@ -76,7 +89,26 @@ export default function Home({ books, ratings }: HomeProps) {
   )
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(req, res, authOptions)
+
+  let myLastRating = null
+
+  if (session?.user) {
+    myLastRating = await prisma.rating.findFirst({
+      where: {
+        user_id: session.user.id,
+      },
+      include: {
+        user: true,
+        book: true,
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    })
+  }
+
   const books = await prisma.book.findMany({
     include: {
       ratings: {
@@ -122,6 +154,11 @@ export async function getServerSideProps() {
   // ----------------------------------------------------------------
 
   const ratings = await prisma.rating.findMany({
+    where: {
+      NOT: {
+        id: myLastRating?.id,
+      },
+    },
     include: {
       user: true,
       book: true,
@@ -136,6 +173,7 @@ export async function getServerSideProps() {
     props: {
       books: JSON.parse(JSON.stringify(booksWithRating)),
       ratings: JSON.parse(JSON.stringify(ratings)),
+      myLastRating: JSON.parse(JSON.stringify(myLastRating)),
     },
   }
 }
