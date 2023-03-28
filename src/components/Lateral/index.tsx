@@ -1,6 +1,7 @@
 import { api } from '@/src/lib/axios'
 import { BookWithRatingAndCategories } from '@/src/pages/explore/index.page'
 import { Rating as RatingPrisma, User as UserPrisma } from '@prisma/client'
+import { useSession } from 'next-auth/react'
 import { CircleNotch, X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
 import { LoginModalLink } from '../LoginModal/LoginModalLink'
@@ -20,8 +21,11 @@ type RatingProps = RatingPrisma & {
 export function Lateral({ onClose, book }: LateralProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [ratings, setRatings] = useState<RatingProps[] | null>(null)
+  const [showRateInput, setShowRateInput] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const session = useSession()
 
   function onCloseModalClick() {
     setIsOpen(false)
@@ -54,6 +58,10 @@ export function Lateral({ onClose, book }: LateralProps) {
     }
   }
 
+  function handleShowRate() {
+    setShowRateInput(true)
+  }
+
   return (
     <Container open={isOpen} ref={containerRef}>
       <SideMenu open={isOpen}>
@@ -63,10 +71,25 @@ export function Lateral({ onClose, book }: LateralProps) {
         <Book book={book} />
         <Title>
           <span>Avaliações</span>
-          <LoginModalLink>
-            <a>Avaliar</a>
-          </LoginModalLink>
+
+          {session.status === 'unauthenticated' && (
+            <LoginModalLink>
+              <a>Avaliar</a>
+            </LoginModalLink>
+          )}
+
+          {session.status === 'authenticated' && (
+            <a onClick={handleShowRate}>Avaliar</a>
+          )}
         </Title>
+        {showRateInput && (
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+            quibusdam a laboriosam doloribus unde, aliquam qui odit nesciunt
+            reiciendis id impedit commodi nostrum repudiandae? Voluptatem
+            reiciendis consequuntur nemo repellendus rerum.
+          </p>
+        )}
         {ratings ? (
           ratings?.map((rating) => (
             <Rating
