@@ -6,6 +6,7 @@ import { CircleNotch, X } from 'phosphor-react'
 import { useEffect, useRef, useState } from 'react'
 import { LoginModalLink } from '../LoginModal/LoginModalLink'
 import { Book } from './components/Book'
+import { RateInput } from './components/RateInput'
 import { Rating } from './components/Rating'
 import { CloseButton, Container, SideMenu, Title } from './styles'
 
@@ -82,14 +83,7 @@ export function Lateral({ onClose, book }: LateralProps) {
             <a onClick={handleShowRate}>Avaliar</a>
           )}
         </Title>
-        {showRateInput && (
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-            quibusdam a laboriosam doloribus unde, aliquam qui odit nesciunt
-            reiciendis id impedit commodi nostrum repudiandae? Voluptatem
-            reiciendis consequuntur nemo repellendus rerum.
-          </p>
-        )}
+        {showRateInput && <RateInput />}
         {ratings ? (
           ratings?.map((rating) => (
             <Rating
