@@ -6,6 +6,7 @@ import { signIn, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { CircleNotch } from 'phosphor-react'
+import Link from 'next/link'
 
 export default function Home() {
   const router = useRouter()
@@ -56,7 +57,7 @@ export default function Home() {
             />
             Entrar com Github
           </LoginButton>
-          <LoginButton>
+          <LoginButton as={Link} href="/home">
             <Image
               src="/images/logo-rocket.png"
               alt=""
