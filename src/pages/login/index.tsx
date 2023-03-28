@@ -3,13 +3,13 @@ import logo from '../../assets/images/logo.svg'
 import Image from 'next/image'
 import { LoginButton } from '@/src/components/LoginButton'
 import { signIn, useSession } from 'next-auth/react'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { CircleNotch } from 'phosphor-react'
 import Link from 'next/link'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth].api'
 
 export default function Home() {
-  const router = useRouter()
   const session = useSession()
 
   async function handleSignInGithub() {
@@ -19,12 +19,6 @@ export default function Home() {
   async function handleSignInGoogle() {
     await signIn('google')
   }
-
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      router.push('/home')
-    }
-  }, [session, router])
 
   return (
     <Container>
@@ -70,4 +64,21 @@ export default function Home() {
       )}
     </Container>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
