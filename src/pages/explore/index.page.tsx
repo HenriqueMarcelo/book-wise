@@ -114,7 +114,8 @@ export default function Explore({ categories, books }: ExploreProps) {
   )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+export async function getServerSideProps() {
   const categories = await prisma.category.findMany()
   const books = await prisma.book.findMany({
     include: {
@@ -157,6 +158,6 @@ export async function getStaticProps() {
       categories: JSON.parse(JSON.stringify(categories)),
       books: JSON.parse(JSON.stringify(booksWithRating)),
     },
-    revalidate: 60 * 60 * 24 * 1, // 1 day
+    // revalidate: 60 * 60 * 24 * 1, // 1 day
   }
 }
