@@ -12,6 +12,7 @@ import {
   User as UserPrisma,
 } from '@prisma/client'
 import { GetServerSideProps } from 'next'
+import { NextSeo } from 'next-seo'
 import {
   BookmarkSimple,
   BookOpen,
@@ -79,6 +80,7 @@ export default function Explore({ infos, ratings, user }: ExploreProps) {
 
   return (
     <Template>
+      <NextSeo title="Perfil | Book Wise" />
       <PageTitle>
         <User size={32} /> Perfil
       </PageTitle>

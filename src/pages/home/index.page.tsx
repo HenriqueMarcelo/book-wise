@@ -10,6 +10,7 @@ import { Container, RightColumn, Title } from './styles'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth].api'
 import { GetServerSideProps } from 'next'
+import { NextSeo } from 'next-seo'
 
 export interface BookWithRatingAndCategories extends Book {
   rating: number
@@ -30,6 +31,7 @@ interface HomeProps {
 export default function Home({ books, ratings, myLastRating }: HomeProps) {
   return (
     <Template>
+      <NextSeo title="Início | Book Wise" />
       <PageTitle>
         <ChartLineUp size={32} /> Início
       </PageTitle>

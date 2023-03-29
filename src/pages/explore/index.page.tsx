@@ -11,6 +11,7 @@ import { prisma } from '@/src/lib/prisma'
 import { Book, Category } from '@prisma/client'
 import { useForm } from 'react-hook-form'
 import { api } from '@/src/lib/axios'
+import { NextSeo } from 'next-seo'
 
 export interface BookWithRatingAndCategories extends Book {
   rating: number
@@ -65,6 +66,7 @@ export default function Explore({ categories, books }: ExploreProps) {
 
   return (
     <Template>
+      <NextSeo title="Explorar | Book Wise" />
       {bookSelected && (
         <Lateral book={bookSelected} onClose={handleCloseLateral} />
       )}
