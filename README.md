@@ -1,56 +1,51 @@
-# Remember:
+[English 🇬🇧](README.md)
 
-// getStaticProps pre-renders the data at _build_ time,
-// getServerSideProps runs at _request_ time.
+## Book Wise
 
-// await new Promise((resolve) => setTimeout(resolve, 2000))
+Book Wise is a web application that allows users to rate books they have read. In addition, the platform displays the reviews made by other users and the average rating the books have received. 
+
+Logging into the application is optional and can be done through Google or Github. Unregistered users can view other users' ratings, but cannot leave ratings.
+
+## Functionalities
+
+- Show the ratings made by other users;
+- Show the average rate a book has;
+- Display the most recent evaluations made on the platform;
+- Listing the most popular books;
+- Filter book listings by category or by entering the name of the book or author in a search field;
+- Display the profile page listing all the evaluations the user has done;
+- Display the total books reviewed, how many authors have been read, and the category most read by the user;
+- Login option through Google and Github;
+- Browsing the application without logging in to view other users' ratings.
+
+## Technologies used
+
+The Book Wise application was built with the following technologies:
+
+- [NextJS](https://nextjs.org/) for building the web application;
+- [Prisma](https://www.prisma.io/) for the database connection and manipulation;
+- [Radix](https://www.radix-ui.com/) for creating the visual components;
+- [Stitches](https://stitches.dev/) for styling;
+- [Next Auth](https://next-auth.js.org/) for user authentication;
+- [Next SEO](https://github.com/garmeeh/next-seo) for SEO optimization;
+- [TypeScript](https://www.typescriptlang.org/) for static typing;
+- [Axios](https://axios-http.com/) for HTTP requests;
+- [ESLint](https://eslint.org/) for code standardization;
+- [DateFNS](https://date-fns.org/) for date manipulation;
+- [Phosphor Icons](https://phosphoricons.com/) for icons;
+- [Zod](https://github.com/colinhacks/zod) for data validation.
+
+## Deploy
+
+The Book Wise application was deployed on the Vercel platform and the database was hosted at Planetscale.
+
+Access the application at: https://book-wise-two.vercel.app/
 
 ## Some useful commands
 
-- `npx prisma init --datasource-provider SQLite`
+- `npx prisma init --datasource-provider SQLite` ##
 - `npx prisma migrate dev`
 - `npx prisma studio`
-- `npx prisma db push`
-- `npx prisma db seed`
+- `npx prisma db push` `npx prisma db push`
+- `npx prisma db seed` `npx prisma db seed`
 
-
-_____________________________________
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
