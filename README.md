@@ -43,9 +43,9 @@ Access the application at: https://book-wise-two.vercel.app/
 
 ## Some useful commands
 
-- `npx prisma init --datasource-provider SQLite` ##
+- `npx prisma init --datasource-provider SQLite`
 - `npx prisma migrate dev`
 - `npx prisma studio`
-- `npx prisma db push` `npx prisma db push`
-- `npx prisma db seed` `npx prisma db seed`
+- `npx prisma db push`
+- `npx prisma db seed`
 
